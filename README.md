@@ -1,65 +1,42 @@
-# Mjolnir
+# LILA
 
-> *Mjolnir*: Thor's hammer, a divine instrument making its holder worthy of wielding lightning.
+> *LILA*: Language-Informed Latent Actions
 
-Template Research Repository for managing Machine Learning Research Projects built with
-[PyTorch-Lightning](https://pytorch-lightning.readthedocs.io/en/latest/), using [Anaconda](https://www.anaconda.com/)
-for Python Dependencies and Sane Quality Defaults (Black, Flake, isort).
+Code and Experiments for Language-Informed Latent Actions (LILA), for using natural language to guide assistive
+teleoperation.
 
-Template created by Sidd Karamcheti.
-
----
-
-## Contributing
-
-Key section if this is a shared research project (e.g., other collaborators). Usually you should have a detailed set
-of instructions in [`CONTRIBUTING.md`](./CONTRIBUTING.md) - Notably, before committing to the repository, *make
-sure to set up your dev environment and pre-commit install (`pre-commit install`)!*
-
-Here are sample contribution guidelines (high-level):
-
-+ Install and activate the Conda Environment using the `QUICKSTART` instructions below.
-
-+ On installing new dependencies (via `pip` or `conda`), please make sure to update the `environment-<ID>.yaml` files
-via the following command (note that you need to separately create the `environment-cpu.yaml` file by exporting from
-your local development environment!):
-
-  `make serialize-env --arch=<cpu | gpu>`
+This code bundles code that can be deployed on a Franka Emika Panda Arm, including utilities for processing
+collected demonstrations (you can find our actual demo data in the `data/` directory!), training various LILA and
+Imitation Learning models, and running live studies.
 
 ---
 
 ## Quickstart
 
-*Note: Replace instances of `mjolnir` and other instructions with instructions specific to your repository!*
+Assumes `lila` is the current working directory! This repository also comes with out-of-the-box linting and strict
+pre-commit checking... should you wish to *turn off this functionality* you can omit the `pre-commit install` lines
+below. If you do choose to use these features, you can run `make autoformat` to automatically clean code, and `make
+check` to identify any violations.
 
-Clones `mjolnir` to the working directory, then walks through dependency setup, mostly leveraging the
-`environment.yaml` files.
+## Repository Structure
 
-### Shared Environment (for Clusters w/ Centralized Conda)
+High-level overview of repository file-tree:
 
-*Note: The presence of this subsection depends on your setup. With the way the Stanford Cluster has been set up, and
-the way I've set up the ILIAD Cluster, this section makes it really easy to maintain dependencies across multiple
-users via centralized `conda` environments, but YMMV.*
-
-@Sidd (or central repository maintainer) has already set up the conda environments in Stanford-NLP/ILIAD. The only
-necessary steps for you to take are cloning the repo, activating the appropriate environment, and running
-`pre-commit install` to start developing.
-
-### Local Development - Linux w/ GPU & CUDA 11.0
-
-Note: Assumes that `conda` (Miniconda or Anaconda are both fine) is installed and on your path.
-
-Ensure that you're using the appropriate `environment-<gpu | cpu>.yaml` file --> if PyTorch doesn't build properly for
-your setup, checking the CUDA Toolkit is usually a good place to start. We have `environment-<gpu>.yaml` files for CUDA
-11.0 (and any additional CUDA Toolkit support can be added -- file an issue if necessary).
-
-```bash
-git clone https://github.com/pantheon-616/mjolnir.git
-cd mjolnir
-conda env create -f environments/environment-gpu.yaml  # Choose CUDA Kernel based on Hardware - by default used 11.0!
-conda activate mjolnir
-pre-commit install  # Important!
-```
++ `conf` - Quinine Configurations (`.yaml`) for various runs (used in lieu of `argparse` or `typed-argument-parser`)
++ `environments` - Serialized Conda Environments for running on CPU. Other architectures/CUDA toolkit
+environments can be added here as necessary.
++ `robot/` - Core `libfranka` robot control code -- simple joint velocity controll w/ Gripper control.
++ `src/` - Source Code - has all utilities for preprocessing, Lightning Model definitions, utilities.
+    + `preprocessing/` - Preprocessing Code for creating Torch Datasets for Training LILA/Imitation Models.
+    + `models/` - Lightning Modules for LILA-FiLM and Imitation-FiLM Architectures.
++ `train.py` - Top-Level (main) entry point to repository, for training and evaluating models. Run this first, pointing
+it at the appropriate configuration in `conf/`!.
++ `Makefile` - Top-level Makefile (by default, supports `conda` serialization, and linting). Expand to your needs.
++ `.flake8` - Flake8 Configuration File (Sane Defaults).
++ `.pre-commit-config.yaml` - Pre-Commit Configuration File (Sane Defaults).
++ `pyproject.toml` - Black and isort Configuration File (Sane Defaults).+ `README.md` - You are here!
++ `README.md` - You are here!
++ `LICENSE` - By default, research code is made available under the MIT License.
 
 ### Local Development - CPU (Mac OS & Linux)
 
@@ -67,87 +44,91 @@ Note: Assumes that `conda` (Miniconda or Anaconda are both fine) is installed an
 environment file.
 
 ```bash
-git clone https://github.com/pantheon-616/mjolnir.git
-cd mjolnir
 conda env create -f environments/environment-cpu.yaml
-conda activate mjolnir
-pre-commit install  # Important!
+conda activate lila
+pre-commit install
 ```
 
-## Usage
+### GPU Development - Linux w/ CUDA 11.0
 
-This repository comes with sane defaults for `black`, `isort`, and `flake8` for formatting and linting. It additionally
-defines a bare-bones Makefile (to be extended for your specific build/run needs) for formatting/checking, and dumping
-updated versions of the dependencies (after installing new modules).
+```bash
+conda env create -f environments/environment-gpu.yaml  # Choose CUDA Kernel based on Hardware - by default used 11.0!
+conda activate lila
+pre-commit install
+```
 
-Other repository-specific usage notes should go here (e.g., training models, running a saved model, running a
-visualization, etc.).
-
-## Repository Structure
-
-High-level overview of repository file-tree (expand on this as you build out your project). This is meant to be brief,
-more detailed implementation/architectural notes should go in [`ARCHITECTURE.md`](./ARCHITECTURE.md).
-
-+ `conf` - Quinine Configurations (`.yaml`) for various runs (used in lieu of `argparse` or `typed-argument-parser`)
-+ `environments` - Serialized Conda Environments for both CPU and GPU (CUDA 11.0). Other architectures/CUDA toolkit
-environments can be added here as necessary.
-+ `src/` - Source Code - has all utilities for preprocessing, Lightning Model definitions, utilities.
-    + `preprocessing/` - Preprocessing Code (fill in details for specific project).
-    + `models/` - Lightning Modules (fill in details for specific project).
-+ `tests/` - Tests - Please test your code... just, please (more details to come).
-+ `train.py` - Top-Level (main) entry point to repository, for training and evaluating models. Can define additional
-top-level scripts as necessary.
-+ `Makefile` - Top-level Makefile (by default, supports `conda` serialization, and linting). Expand to your needs.
-+ `.flake8` - Flake8 Configuration File (Sane Defaults).
-+ `.pre-commit-config.yaml` - Pre-Commit Configuration File (Sane Defaults).
-+ `pyproject.toml` - Black and isort Configuration File (Sane Defaults).
-+ `ARCHITECTURE.md` - Write up of repository architecture/design choices, how to extend and re-work for different
-applications.
-+ `CONTRIBUTING.md` - Detailed instructions for contributing to the repository, in furtherance of the default
-instructions above.
-+ `README.md` - You are here!
-+ `LICENSE` - By default, research code is made available under the MIT License. Change as you see fit, but think
-deeply about why!
+Note: This codebase should work naively for all PyTorch > 1.7, and any CUDA version; if you run into trouble building
+this repository, please file an issue!
 
 ---
 
-## Start-Up (from Scratch)
+## Training LILA or Imitation Models
 
-Use these commands if you're starting a repository from scratch (this shouldn't be necessary for your collaborators
-, since you'll be setting things up, but I like to keep this in the README in case things break in the future).
-Generally, if you're just trying to run/use this code, look at the Quickstart section above.
+To train models using the already collected demonstrations.
 
-### GPU & Cluster Environments (CUDA 11.0)
+```
+# LILA
+python train.py --config conf/lila-config.yaml
 
-```bash
-conda create --name mjolnir python=3.8
-conda install pytorch torchvision torchaudio cudatoolkit=11.0 -c pytorch   # CUDA=11.0 on most of Cluster!
-conda install ipython jupyter
-conda install pytorch-lightning -c conda-forge
+# No-Language Latent Actions
+python train.py --config conf/no-lang-config.yaml
 
-pip install black flake8 isort matplotlib pre-commit quinine wandb
-
-# Install other dependencies via pip below -- conda dependencies should be added above (always conda before pip!)
-...
+# Imitatation Learning (Behavioral Cloning w/ DART-style Augmentation)
+python train.py --config conf/imitation-config.yaml
 ```
 
-### CPU Environments (Usually for Local Development -- Geared for Mac OS & Linux)
+This will dump models to `runs/{lila-final, no-lang-final, imitation-final}/`. These paths are **hard-coded** in the
+respective teleoperation/execution files below; if you change these paths, be sure to change the below files as well!
 
-Similar to the above, but installs the CPU-only versions of Torch and similar dependencies.
+## Teleoperating with LILA or End-Effector Control
+
+First, make sure to add the custom Velocity Controller written for the Franka Emika Panda Robot Arm (written using
+Libfranka) to ~/libfranka/examples on your robot control box. The controller can be found in
+`robot/libfranka/lilaVelocityController.cpp`.
+
+Then, make sure to update the path of the model trained in the previous step (for LILA) in `teleoperate.py`. Finally,
+you can drop into controlling the robot with a LILA model (and Joystick - make sure it's plugged in!) with:
+
+```
+# LILA Control
+python teleoperate.py
+
+# For No-Language Control, just change the arch!
+python teleoperate.py --arch no-lang
+
+# Pure End-Effector Control is also implemented by Default
+python teleoperate.py --arch endeff
+```
+
+## Running Imitation Learning
+
+Add the Velocity Controller as described above. Then, make sure to update the path to the trained model in `imitate.py`
+and run the following:
+
+```
+python imitate.py
+```
+
+---
+
+### Collecting Kinesthetic Demonstrations
+
+Each lab (and corresponding robot) is built with a different stack, and different preferred ways of recording
+Kinesthetic demonstrations. We have a rudimentary script `record.py` that shows how we do this using sockets, and the
+default `libfranka readState.cpp` built-in script. This script dumps demonstrations that can be immediately used to train
+latent action models.
+
+### Start-Up from Scratch
+
+In case the above `conda` environment loading does not work for you, here are the concrete package dependencies
+required to run LILA:
 
 ```bash
-conda create --name mjolnir python=3.8
+conda create --name lila python=3.8
+conda activate lila
 conda install pytorch torchvision torchaudio -c pytorch
 conda install ipython jupyter
 conda install pytorch-lightning -c conda-forge
 
-pip install black flake8 isort matplotlib pre-commit quinine wandb
-
-# Install other dependencies via pip below -- conda dependencies should be added above (always conda before pip!)
-...
+pip install black flake8 isort matplotlib pre-commit pygame quinine transformers typed-argument-parser wandb
 ```
-
-### Containerized Setup
-
-Support for running `mjolnir` inside of a Docker or Singularity container is TBD. If this support is urgently required,
-please file an issue (this is an actual WIP).

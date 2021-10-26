@@ -1,0 +1,50 @@
+# imitation-config.yaml
+#   Imitation Learning w/ Retrieval + FiLM/GeLU Configuration. Uses behavioral cloning to learn a model that predicts
+#   continuous joint velocities.
+#
+#   Language is handled via "retrieval" --> during training, we use a standard FiLM architecture built atop mean-pooled
+#   RoBERTa* Embeddings, and during testing, we use nearest-neighbor methods to retrieve the
+#   "closest" example from the training set.
+#
+#   Runs Data Augmentation by augmenting each state several times with noise drawn from N(0, 0.01).
+---
+
+# Mode
+mode: final
+
+# Specify a Model Architecture
+arch: imitation
+zaug_lambda: null
+
+# Run ID -- defaults to `null`; override as you like!
+run_id: imitation-final
+run_dir: runs/
+
+# Demonstration Directory
+demonstrations: data/il-demonstrations-mturk/
+
+# Model Parameters
+state_dim: 7
+action_dim: 7
+latent_dim: 2
+hidden_dim: 30
+
+# Optimization Parameters --> Batch Size, Learning Rate, Step Size (Number of Steps before decay), Gamma (Decay Rate)
+bsz: 1024
+lr: 0.01
+lr_step_size: 200
+lr_gamma: 0.1
+
+# Training Parameters
+epochs: 20
+gpus: 0
+
+# Augmentation Parameters
+augment: true
+augmentation_factor: 3
+
+# Logging Parameters -- 10 = DEBUG, 20 = INFO, 30 = WARNING, 40 = ERROR, 50 = CRITICAL
+log_level: 20
+
+# Random Seed
+seed: 21

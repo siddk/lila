@@ -1,6 +1,6 @@
 # See https://pre-commit.com for more information
 # See https://pre-commit.com/hooks.html for more hooks
-exclude: ".git"  # TODO - add nox files if we ever get around to implementing testing
+exclude: ".git"  # TODO - add tox/nox files if we ever get around to implementing testing
 default_stages:
     - commit
 fail_fast: true
@@ -15,6 +15,7 @@ repos:
             -   id: check-toml
             -   id: check-merge-conflict
             -   id: check-added-large-files
+                args: ["--maxkb=5000"]
 
     -   repo: https://github.com/psf/black
         rev: 20.8b1

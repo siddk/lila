@@ -1,0 +1,44 @@
+# no-lang-config.yaml
+#   No-Language Latent Actions w/ GeLU CAE Configuration (w/ Z=0 Augmentation). Simple arguments for
+#   training a multi-task "No-Language" Conditional Auto-Encoder from a dataset of demonstrations.
+---
+
+# Mode
+mode: final
+
+# Specify a Model Architecture
+arch: no-lang
+zaug_lambda: 10.0
+
+# Run ID -- defaults to `null`; override as you like!
+run_id: no-lang-final
+run_dir: runs/
+
+# Demonstration Directory
+demonstrations: data/lila-demonstrations-mturk/
+
+# Model Parameters
+state_dim: 7
+action_dim: 7
+latent_dim: 2
+hidden_dim: 30
+
+# Optimization Parameters --> Batch Size, Learning Rate, Step Size (Number of Steps before decay), Gamma (Decay Rate)
+bsz: 1024
+lr: 0.01
+lr_step_size: 200
+lr_gamma: 0.1
+
+# Training Parameters
+epochs: 20
+gpus: 0
+
+# Augmentation Parameters
+augment: true
+augmentation_factor: 1
+
+# Logging Parameters -- 10 = DEBUG, 20 = INFO, 30 = WARNING, 40 = ERROR, 50 = CRITICAL
+log_level: 20
+
+# Random Seed
+seed: 21

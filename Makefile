@@ -28,3 +28,7 @@ check:
 autoformat:
 	isort --atomic .
 	black .
+
+prune:
+	@bash -c "git fetch -p";
+	@bash -c "for branch in $(git branch -vv | grep ': gone]' | awk '{print $1}'); do git branch -d $branch; done";
