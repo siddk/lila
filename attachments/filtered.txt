@@ -1,0 +1,70 @@
+instruct the robot to clear other item beside the targeted item for a smooth pick up
+correct guidance and maintance
+robots save workers from performing dangerous tasks. they can work in hazardous conditions, such as poor lighting, toxic chemicals, or tight spaces.
+move the fruit basket to from the table and place it gently on tray
+grab the purple basket in front of you and place it on the black tray next to you.
+move your arm outwards towards the left about 10 inches, lower your arm until you can't anymore then close your claw.
+good
+take the fruit basket
+change the basket of place
+move forward, pick up basket, move up, move backward, place basket down.
+instruct the robot to pick slowly as to avoid disrupt
+the person help a robot to take banana from the table
+robots increase worker safety by preventing accidents since humans are not performing risky jobs.
+move the banana beside the transparent cup gently into the fruit basket on the wooden table
+go to the left and grab the banana on the white tray then place it on the purple basket in front of you.
+move your arm southwest about two feet, lower your claw to grab the banana and then raise your arm 8 inches moving it about a foot to the northwest then lower your arm and release the claw.
+good
+put the banana on the fruit basket.
+put the banana in the basket
+move left, pick up banana, move up, drop banana in basket.
+instruct the robot to pick from both side
+the human the robot to take bowl
+workcells provide safety features, separating the worker from harms way.
+move the white mug from the table to the tray gently
+grab the green cup on the right on place it on top of the black tray.
+move your arm to the northwest about two feet, lower your arm, grab onto the bowl, bring your claw back southeast about a foot and lower it onto the tray and release your claw.
+good
+put the bowl on the tray.
+change the pan of place
+move forward and left, pick up bowl, move backwards, move down, drop bowl.
+instruct the robot to move cup closer to the targeted cup
+charge correctly
+humanoid robots are robots that look like and/or mimic human behavior.
+move the white plastic spoon in the smaller cup on the left hand side of the tray to the bigger cup located on the right side of the tray
+grab the white spoon on the little black cup on the left and the place it on the big black cup on the right.
+move your arm about 9 inches to the west lower your arm and use your claw to grab the spoon, raise your claw 8 inches, move your arm north about 8 inches then lower the spoon into the other cup.
+good
+take the cup.
+put the spoon in the cup
+move down, pick up spoon, move right, move down, drop spoon
+instruct the robot to pick the item with fair move
+proper instruction to guide
+these robots usually perform human-like activities (like running, jumping and carrying objects), and are sometimes designed to look like us, even having human faces and expressions.
+move the white spoon in the small cup on the left side of the tray to the white mug in the center of the tray
+grab the spoon on the small cup and place it on the green cup with the cheerios.
+move your arm about a foot to the west, lower arm, grab spoon with claw, raise arm, move it about 6 inches to the north east then lower the arm and release the spoon.
+good
+take the grain bowl on the tray.
+put the spoon in the pan
+move down, pick up spoon, move up, move right, move down, drop spoon.
+instruct or program the robot to pick the cup with slow action in other to meet the target
+robot not have feelings
+besides the research, humanoid robots are being developed to perform human tasks like personal assistance, through which they should be able to assist the sick and elderly, and dirty or dangerous jobs.
+move the cup beside the banana on the white table and turn over the content into the white mug in the tray
+grab the mug on the white tray next to the banana and out what's inside on the green mug then put it back on the white tray.
+move your arm about 2 feet to the southwest lower arm, use your claw to grab the cup, raise arm about 6 inches, move your arm to the north east about a foot then rotate the cup in a manner that drop the balls into the bowl. return the cup to its original position.
+good
+put milk on the bowl.
+pour the contents of the container into the pan
+move forward, move down, pick up blue cup, move up, pour into bowl
+instruct the robot to pick the item closer to the targeted cup
+correct attachment of robot material and metal and battery
+the robot end-effector or end-of-arm tooling is the bridge between the robot arm and the environment around it.
+pour content from the cup on the white table to the biggest cup in the tray
+grab the mug on the white tray, place the content on the black mug on the far end of the table and then place it back on the white tray.
+move arm to the southwest about two feet, lower arm, grab cup, raise arm 6 inches, move it to the north and slightly to the east until you're over the black cup, rotate the arm until the balls fall into the black cup then return the original cup to its original position.
+good
+take the bowl on the tray.
+pour the contents of the container into the cup
+move forward, down, pick up blue cup, move right, pour into black bowl
